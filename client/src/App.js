@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import BrowseUsers from './pages/BrowseUsers';
 import UserProfile from './pages/UserProfile';
 import MySwaps from './pages/MySwaps';
+import AdminDashboard from './pages/AdminDashboard';
 import LoadingSpinner from './components/LoadingSpinner';
 
 // Protected Route Component
@@ -21,6 +22,17 @@ const ProtectedRoute = ({ children }) => {
   }
   
   return user ? children : <Navigate to="/login" />;
+};
+
+// Admin Route Component
+const AdminRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+  
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  
+  return user && user.role === 'admin' ? children : <Navigate to="/" />;
 };
 
 function App() {
@@ -64,6 +76,16 @@ function App() {
               <ProtectedRoute>
                 <MySwaps />
               </ProtectedRoute>
+            } 
+          />
+          
+          {/* Admin Routes */}
+          <Route 
+            path="/admin" 
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
             } 
           />
         </Routes>
