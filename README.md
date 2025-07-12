@@ -1,6 +1,6 @@
-# ReWear_Community_init
+# Skill_Swap_init
 
-# ReWear – Community Clothing Exchange 
+# Skill Swap Platform
 
 # Team name - Init
 
